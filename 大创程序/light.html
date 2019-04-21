@@ -1,0 +1,617 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	 <head>
+	 	 <title>Intelligent traffic light</title>
+	 	 <meta charset="utf-8"><link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+	 	 <link rel="stylesheet" type="text/css" href="light.css"/>
+	 	 <!--<script type="text/javascript" src="jquery.js"></script>-->
+	 	 <script type="text/javascript" src="RangeSlider.js"></script>
+	 	 <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+         <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+         <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+	 </head>
+
+	 <body>
+	 	<header>
+	 		<h1 class="movingtitle">
+	 			智能交通灯
+	 		</h1>
+	 	</header>
+	 	<div class="middle">
+	 			<div class="Simulation">
+	                <fieldset>
+	                	<legend>
+	                		十字路口模拟
+	                	</legend>
+	                	<canvas id="drawing" width="750" height="750">
+				    		<script type="text/javascript">
+				    			var drawing =document.getElementById("drawing");
+				    			if(drawing.getContext){
+				    				var context=drawing.getContext("2d");
+				    				context.beginPath();
+				    				context.moveTo(250,250);
+				    				context.lineTo(250,25);
+				    				context.moveTo(250,250);
+				    				context.lineTo(25,250);
+				    				context.moveTo(250,500);
+				    				context.lineTo(25,500);
+				    				context.moveTo(250,500);
+				    				context.lineTo(250,725);
+				    				context.moveTo(500,250);
+				    				context.lineTo(500,25);
+				    				context.moveTo(500,250);
+				    				context.lineTo(725,250);
+				    				context.moveTo(500,500);
+				    				context.lineTo(725,500);
+				    				context.moveTo(500,500);
+				    				context.lineTo(500,725);
+				    				context.moveTo(25,375);
+				    				context.lineTo(250,375);
+				    				context.moveTo(375,25);
+				    				context.lineTo(375,250);
+				    				context.moveTo(725,375);
+				    				context.lineTo(500,375);
+				    				context.moveTo(375,725);
+				    				context.lineTo(375,500);
+				    				context.moveTo(625,170);
+				    				context.lineTo(625,90);
+				    				context.moveTo(625,90);
+				    				context.lineTo(615,100);
+				    				context.moveTo(625,90);
+				    				context.lineTo(635,100);
+				    				context.font = "bold 25px Verdana";
+				    				context.textAlign = "center";
+				    				context.textBaseline = "middle";
+				    				context.fillText("北",625,75);
+				    				//西直行
+				    				context.moveTo(125,475);
+				    				context.lineTo(625,475);
+				    				context.moveTo(625,475);
+				    				context.lineTo(600,450);
+				    				context.moveTo(625,475);
+				    				context.lineTo(600,500);
+				    				//西左拐
+				    				/*context.moveTo(125,400);
+				    				context.lineTo(275,400);
+				    				context.moveTo(275,400);
+				    				context.lineTo(400,275);
+				    				context.moveTo(400,275);
+				    				context.lineTo(400,125);
+				    				context.moveTo(400,125);
+				    				context.lineTo(375,150);
+				    				context.moveTo(400,125);
+				    				context.lineTo(425,150);*/
+				    				//东直行
+				    				/*context.moveTo(625,275);
+				    				context.lineTo(125,275);
+				    				context.moveTo(125,275);
+				    				context.lineTo(150,250);
+				    				context.moveTo(125,275);
+				    				context.lineTo(150,300);*/
+				    				//东左拐
+				    				/*context.moveTo(625,350);
+				    				context.lineTo(475,350);
+				    				context.moveTo(475,350);
+				    				context.lineTo(350,475);
+				    				context.moveTo(350,475);
+				    				context.lineTo(350,625);
+				    				context.moveTo(350,625);
+				    				context.lineTo(375,600);
+				    				context.moveTo(350,625);
+				    				context.lineTo(325,600);*/
+				    				//北直行
+				    				/*context.moveTo(275,125);
+				    				context.lineTo(275,625);
+				    				context.moveTo(275,625);
+				    				context.lineTo(250,600);
+				    				context.moveTo(275,625);
+				    				context.lineTo(300,600);*/
+				    				//北左拐
+				    				/*context.moveTo(350,125);
+				    				context.lineTo(350,275);
+				    				context.moveTo(350,275);
+				    				context.lineTo(475,400);
+				    				context.moveTo(475,400);
+				    				context.lineTo(625,400);
+				    				context.moveTo(625,400);
+				    				context.lineTo(600,425);
+				    				context.moveTo(625,400);
+				    				context.lineTo(600,375);*/
+				    				//南直行
+				    				/*context.moveTo(475,625);
+				    				context.lineTo(475,125);
+				    				context.moveTo(475,125);
+				    				context.lineTo(450,150);
+				    				context.moveTo(475,125);
+				    				context.lineTo(500,150);*/
+				    				//南左拐
+				    				/*context.moveTo(400,625);
+				    				context.lineTo(400,475);
+				    				context.moveTo(400,475);
+				    				context.lineTo(275,350);
+				    				context.moveTo(275,350);
+				    				context.lineTo(125,350);
+				    				context.moveTo(125,350);
+				    				context.lineTo(150,325);
+									context.moveTo(125,350);
+									context.lineTo(150,375);*/
+				    				context.stroke();
+				    				context.save();
+				    			}
+				    		</script>
+				    	</canvas>
+	                </fieldset>
+	              
+	            </div>
+	       	    <div class="control">
+	                <fieldset>
+	                	<legend>
+	                		车流量控制
+	                	</legend>
+	                	<div class="tab-wrap">
+	                        <input type="radio" id="tab1" name="tabGroup1" class="tab" checked> <!-- 设置一个默认状态 -->
+	                        <label for="tab1"><span class="btn active">东</span></label>
+	                        <input type="radio" id="tab2" name="tabGroup1" class="tab">
+	                        <label for="tab2"><span class="btn">南</span></label>
+	                        <input type="radio" id="tab3" name="tabGroup1" class="tab">
+	                        <label for="tab3"><span class="btn">西</span></label>
+	                        <input type="radio" id="tab4" name="tabGroup1" class="tab">
+	                        <label for="tab4"><span class="btn">北</span></label>
+	                        <div class="tab__content">
+	                        	<h3>直行</h3>
+	                        	<label for="slider1">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider1" name="east_straight[]" value="0">
+	                            <br/><label for="slider2">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider2" name="east_straight[]" value="0">
+	                            <br/><label for="slider3">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider3" name="east_straight[]" value="0">
+	                            <hr/>
+	                            <h3>左拐</h3>
+	                            <label for="slider4">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider4" name="east_left[]" value="0">
+	                            <br/><label for="slider5">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider5" name="east_left[]" value="0">
+	                            <br/><label for="slider6">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider6" name="east_left[]" value="0">
+	                        </div>
+	                        <div class="tab__content">
+	                          	<h3>直行</h3>
+	                        	<label for="slider7">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider7" name="south_straight[]" value="0">
+	                            <br/><label for="slider8">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider8" name="south_straight[]" value="0">
+	                            <br/><label for="slider9">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider9" name="south_straight[]" value="0">
+	                            <hr/>
+	                            <h3>左拐</h3>
+	                            <label for="slider10">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider10" name="south_left[]" value="0">
+	                            <br/><label for="slider11">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider11" name="south_left[]" value="0">
+	                            <br/><label for="slider12">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider12" name="south_left[]" value="0">
+	                        </div>
+	  						<div class="tab__content">
+	    						<h3>直行</h3>
+	                        	<label for="slider13">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider13" name="west_straight[]" value="0">
+	                            <br/><label for="slider14">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider14" name="west_straight[]" value="0">
+	                            <br/><label for="slider15">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider15" name="west_straight[]" value="0">
+	                            <hr/>
+	                            <h3>左拐</h3>
+	                            <label for="slider16">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider16" name="west_left[]" value="0">
+	                            <br/><label for="slider17">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider17" name="west_left[]" value="0">
+	                            <br/><label for="slider18">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider18" name="west_left[]" value="0">
+	  						</div>
+	  						<div class="tab__content">
+	    						<h3>直行</h3>
+	                        	<label for="slider19">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider19" name="north_straight[]" value="0">
+	                            <br/><label for="slider20">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider20" name="north_straight[]" value="0">
+	                            <br/><label for="slider21">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider21" name="north_straight[]" value="0">
+	                            <hr/>
+	                            <h3>左拐</h3>
+	                            <label for="slider22">单位时间增加车流量</label><br/>
+	                        	<input type="range" id="slider22" name="north_left[]" value="0">
+	                            <br/><label for="slider23">单位时间减少车流量</label><br/>
+	                            <input type="range" id="slider23" name="north_left[]" value="0">
+	                            <br/><label for="slider24">当前路口滞留车辆</label><br/>
+	                            <input type="range" id="slider24" name="north_left[]" value="0">
+	  						</div>
+	  						<script>
+	            				var change = function($input) {
+	               				 /*内容可自行定义*/
+	                			console.log("123");
+	            				}
+	            				$('input').RangeSlider({ min: 0,   max: 100,  step: 0.1,  callback: change});
+	       					</script>
+						</div>
+	                </fieldset>
+	            </div>
+	       	    <div class="picture">
+	                <fieldset>
+	                	<legend>
+	                		实时车流量变化曲线图
+	                	</legend>
+	                	<div class="tab-wrap">
+	                		<input type="radio" id="tab5" name="tabGroup2" class="tab" checked> <!-- 设置一个默认状态 -->
+	                        <label for="tab5"><span class="btn active">东</span></label>
+	                        <input type="radio" id="tab6" name="tabGroup2" class="tab">
+	                        <label for="tab6"><span class="btn">南</span></label>
+	                        <input type="radio" id="tab7" name="tabGroup2" class="tab">
+	                        <label for="tab7"><span class="btn">西</span></label>
+	                        <input type="radio" id="tab8" name="tabGroup2" class="tab">
+	                        <label for="tab8"><span class="btn">北</span></label>               	
+	                		<div class="tab__content">
+	                			<div id="container1" style="width:500px;height:auto;"></div>
+							        <script>
+										            // JS 代码 
+										Highcharts.setOptions({
+												global: {
+														useUTC: false
+												}
+										});
+										function activeLastPointToolip(chart) {
+												var points = chart.series[0].points;
+												chart.tooltip.refresh(points[points.length -1]);
+										}
+										var chart = Highcharts.chart('container1', {
+												chart: {
+														type: 'spline',
+														marginRight: 10,
+														events: {
+																load: function () {
+																		var series = this.series[0],
+																				chart = this;
+																		activeLastPointToolip(chart);
+																		setInterval(function () {
+																				var x = (new Date()).getTime(), // 当前时间
+																						y = Math.random();          // 随机值
+																				series.addPoint([x, y], true, true);
+																				activeLastPointToolip(chart);
+																		}, 1000);
+																}
+														}
+												},
+												title: {
+														text: '各路口滞留车辆实时变化图'
+												},
+												xAxis: {
+														type: 'datetime',
+														tickPixelInterval: 10                       //邻近两刻度之间的距离
+												},
+												yAxis: {
+														title: {
+																text: '滞留车辆'
+														}
+												},
+												tooltip: {
+														formatter: function () {
+																return '<b>' + this.series.name + '</b><br/>' +
+																		Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+																		Highcharts.numberFormat(this.y, 2);
+														}
+												},
+												legend: {
+														enabled: false
+												},
+												series: [{
+														name: '随机数据',
+														data: (function () {
+																// 生成随机值
+																var data = [],
+																		time = (new Date()).getTime(),
+																		i;
+																for (i = -19; i <= 0; i += 1) {
+																		data.push({
+																				x: time + i * 1000,
+																				y: Math.random()
+																		});
+																}
+																return data;
+														}())
+												}]
+										});
+							        </script>
+	                		</div>
+	                		<div class="tab__content">
+	                			<div id="container2" style="width:500px;height:auto;"></div>
+							        <script>
+										            // JS 代码 
+										Highcharts.setOptions({
+												global: {
+														useUTC: false
+												}
+										});
+										function activeLastPointToolip(chart) {
+												var points = chart.series[0].points;
+												chart.tooltip.refresh(points[points.length -1]);
+										}
+										var chart = Highcharts.chart('container2', {
+												chart: {
+														type: 'spline',
+														marginRight: 10,
+														events: {
+																load: function () {
+																		var series = this.series[0],
+																				chart = this;
+																		activeLastPointToolip(chart);
+																		setInterval(function () {
+																				var x = (new Date()).getTime(), // 当前时间
+																						y = Math.random();          // 随机值
+																				series.addPoint([x, y], true, true);
+																				activeLastPointToolip(chart);
+																		}, 1000);
+																}
+														}
+												},
+												title: {
+														text: '各路口滞留车辆实时变化图'
+												},
+												xAxis: {
+														type: 'datetime',
+														tickPixelInterval: 10                       //邻近两刻度之间的距离
+												},
+												yAxis: {
+														title: {
+																text: '滞留车辆'
+														}
+												},
+												tooltip: {
+														formatter: function () {
+																return '<b>' + this.series.name + '</b><br/>' +
+																		Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+																		Highcharts.numberFormat(this.y, 2);
+														}
+												},
+												legend: {
+														enabled: false
+												},
+												series: [{
+														name: '随机数据',
+														data: (function () {
+																// 生成随机值
+																var data = [],
+																		time = (new Date()).getTime(),
+																		i;
+																for (i = -19; i <= 0; i += 1) {
+																		data.push({
+																				x: time + i * 1000,
+																				y: Math.random()
+																		});
+																}
+																return data;
+														}())
+												}]
+										});
+							        </script>
+	                		</div>
+	                		<div class="tab__content">
+	                			<div id="container3" style="width:500px;height:auto;"></div>
+							        <script>
+										            // JS 代码 
+										Highcharts.setOptions({
+												global: {
+														useUTC: false
+												}
+										});
+										function activeLastPointToolip(chart) {
+												var points = chart.series[0].points;
+												chart.tooltip.refresh(points[points.length -1]);
+										}
+										var chart = Highcharts.chart('container3', {
+												chart: {
+														type: 'spline',
+														marginRight: 10,
+														events: {
+																load: function () {
+																		var series = this.series[0],
+																				chart = this;
+																		activeLastPointToolip(chart);
+																		setInterval(function () {
+																				var x = (new Date()).getTime(), // 当前时间
+																						y = Math.random();          // 随机值
+																				series.addPoint([x, y], true, true);
+																				activeLastPointToolip(chart);
+																		}, 1000);
+																}
+														}
+												},
+												title: {
+														text: '各路口滞留车辆实时变化图'
+												},
+												xAxis: {
+														type: 'datetime',
+														tickPixelInterval: 10                       //邻近两刻度之间的距离
+												},
+												yAxis: {
+														title: {
+																text: '滞留车辆'
+														}
+												},
+												tooltip: {
+														formatter: function () {
+																return '<b>' + this.series.name + '</b><br/>' +
+																		Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+																		Highcharts.numberFormat(this.y, 2);
+														}
+												},
+												legend: {
+														enabled: false
+												},
+												series: [{
+														name: '随机数据',
+														data: (function () {
+																// 生成随机值
+																var data = [],
+																		time = (new Date()).getTime(),
+																		i;
+																for (i = -19; i <= 0; i += 1) {
+																		data.push({
+																				x: time + i * 1000,
+																				y: Math.random()
+																		});
+																}
+																return data;
+														}())
+												}]
+										});
+							        </script>
+	                		</div>
+	                		<div class="tab__content">
+	                			<div id="container4" style="width:500px;height:auto;"></div>
+							        <script>
+										            // JS 代码 
+										Highcharts.setOptions({
+												global: {
+														useUTC: false
+												}
+										});
+										function activeLastPointToolip(chart) {
+												var points = chart.series[0].points;
+												chart.tooltip.refresh(points[points.length -1]);
+										}
+										var chart = Highcharts.chart('container4', {
+												chart: {
+														type: 'spline',
+														marginRight: 10,
+														events: {
+																load: function () {
+																		var series = this.series[0],
+																				chart = this;
+																		activeLastPointToolip(chart);
+																		setInterval(function () {
+																				var x = (new Date()).getTime(), // 当前时间
+																						y = Math.random();          // 随机值
+																				series.addPoint([x, y], true, true);
+																				activeLastPointToolip(chart);
+																		}, 1000);
+																}
+														}
+												},
+												title: {
+														text: '各路口滞留车辆实时变化图'
+												},
+												xAxis: {
+														type: 'datetime',
+														tickPixelInterval: 10                       //邻近两刻度之间的距离
+												},
+												yAxis: {
+														title: {
+																text: '滞留车辆'
+														}
+												},
+												tooltip: {
+														formatter: function () {
+																return '<b>' + this.series.name + '</b><br/>' +
+																		Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+																		Highcharts.numberFormat(this.y, 2);
+														}
+												},
+												legend: {
+														enabled: false
+												},
+												series: [{
+														name: '随机数据',
+														data: (function () {
+																// 生成随机值
+																var data = [],
+																		time = (new Date()).getTime(),
+																		i;
+																for (i = -19; i <= 0; i += 1) {
+																		data.push({
+																				x: time + i * 1000,
+																				y: Math.random()
+																		});
+																}
+																return data;
+														}())
+												}]
+										});
+							        </script>
+	                		</div>
+	                	</div>
+	                </fieldset>
+	            </div> 
+	       	    <div class="data">
+	       	    	<fieldset>
+	       	    		<legend>
+	       	    			实时路口数据
+	       	    		</legend>
+	       	    		<table border="1" align="center">
+	                     	<tr>
+	                     		<th class="slash" colspan="2"><span style="right: 0;top: 0;position: absolute;">车流量</span><br><br><br><span style="left: 0;bottom: 0;position: absolute;">方向</span></th>
+	                     		<th>滞留车辆</th>
+	                     		<th>车流量净变化量</th>
+	                     		<th>当前路口红绿灯</th>
+	                     	</tr>
+	                     	<tr>
+	                     		<td rowspan="2">东</td>
+	                     		<td>直行</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td>左拐</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td rowspan="2">南</td>
+	                     		<td>直行</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td>左拐</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td rowspan="2">西</td>
+	                     		<td>直行</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td>左拐</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td rowspan="2">北</td>
+	                     		<td>直行</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                     	<tr>
+	                     		<td>左拐</td>
+	                     		<td></td>
+	                     		<td></td>
+	                     		<td></td>
+	                     	</tr>
+	                	</table>
+	       	    	</fieldset>                 
+	            </div>
+	   </div>
+	   <div class="right">
+	   </div>
+	   <div class="left">
+	   </div>
+	 </body>
+	</html>
