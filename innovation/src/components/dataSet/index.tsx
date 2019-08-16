@@ -1,19 +1,33 @@
-import {Tabs, Slider, InputNumber, Row, Col} from 'antd';
+import {Tabs, Slider, InputNumber, Row, Col, Divider} from 'antd';
 import * as React from "react";
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 import './index.scss'
+import {CrossroadsData} from "../../share/constant";
+import {number} from "prop-types";
 const {TabPane} = Tabs;
 
-export class IntegerStep extends React.Component {
+interface DataSetProps {
+    dataChange: (value:number,direction:string,changeDataType:string) => void
+}
+
+interface TabPaneContentProps {
+    dataChange: (value:number,direction:string,changeDataType:string) => void,
+    direction: string
+}
+
+interface IntegerStepProps {
+    dataChange: (value:number,direction:string,changeDataType:string) => void,
+    direction: string,
+    changeDataType: string
+}
+
+export class IntegerStep extends React.Component<IntegerStepProps,any> {
     state = {
         inputValue: 1,
     };
 
     onChange = (value:any) => {
-        // console.log(value);
-        this.setState({
-            inputValue: value,
-        });
+        this.props.dataChange(value,this.props.direction,this.props.changeDataType);
     };
 
     render() {
@@ -48,20 +62,27 @@ export class IntegerStep extends React.Component {
     }
 }
 
-export class TabPaneContent extends React.Component {
+export class TabPaneContent extends React.Component<TabPaneContentProps, any> {
     render() {
         return (
             <div>
+                <h2>直行</h2>
                 <div className="formItem-title">单位时间增加车流量</div>
-                <IntegerStep/>
+                <IntegerStep direction={this.props.direction+"Straight"} dataChange={this.props.dataChange} changeDataType={CrossroadsData.unitGrowth}/>
                 <div className="formItem-title">单位时间减少车流量</div>
-                <IntegerStep/>
+                <IntegerStep direction={this.props.direction+"Straight"} dataChange={this.props.dataChange} changeDataType={CrossroadsData.unitReduce}/>
+                <Divider />
+                <h2>左拐</h2>
+                <div className="formItem-title">单位时间增加车流量</div>
+                <IntegerStep direction={this.props.direction+"Left"} dataChange={this.props.dataChange} changeDataType={CrossroadsData.unitGrowth}/>
+                <div className="formItem-title">单位时间减少车流量</div>
+                <IntegerStep direction={this.props.direction+"Left"} dataChange={this.props.dataChange} changeDataType={CrossroadsData.unitReduce}/>
             </div>
         );
     }
 }
 
-export class DataSet extends React.Component {
+export class DataSet extends React.Component<DataSetProps, any> {
     render() {
         return (
             <div className="dataSet">
@@ -69,22 +90,22 @@ export class DataSet extends React.Component {
                     type="card">
                     <TabPane tab="东"
                              key="1">
-                        <TabPaneContent/>
+                        <TabPaneContent direction="east" dataChange={this.props.dataChange}/>
                     </TabPane>
                     <TabPane
                         tab="南"
                         key="2">
-                        <TabPaneContent/>
+                        <TabPaneContent direction="south" dataChange={this.props.dataChange}/>
                     </TabPane>
                     <TabPane
                         tab="西"
                         key="3">
-                        <TabPaneContent/>
+                        <TabPaneContent direction="west" dataChange={this.props.dataChange}/>
                     </TabPane>
                     <TabPane
                         tab="北"
                         key="4">
-                        <TabPaneContent/>
+                        <TabPaneContent direction="north" dataChange={this.props.dataChange}/>
                     </TabPane>
                 </Tabs>
             </div>
