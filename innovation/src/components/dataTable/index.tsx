@@ -1,42 +1,63 @@
 import * as React from "react";
 import {Table} from "antd";
+import 'antd/dist/antd.css';
 import './index.scss'
+import {DirectionData} from "../../summary";
 
-export class DataTable extends React.Component {
+interface DataTableData {
+    eastStraight: DirectionData,
+    eastLeft: DirectionData,
+    westStraight: DirectionData,
+    westLeft: DirectionData,
+    southStraight: DirectionData,
+    southLeft: DirectionData,
+    northStraight: DirectionData,
+    northLeft: DirectionData
+}
+
+interface DataTableProps {
+    data: DataTableData
+}
+
+export class DataTable extends React.Component<DataTableProps, any> {
     render() {
+        const {eastStraight ,eastLeft, northLeft, northStraight, southLeft, southStraight, westLeft, westStraight} = this.props.data;
         const dataSource = [
             {
                 dataItem: '滞留车辆',
-                eastStraight: 123,
-                eastLeft: 321,
-                westStraight: 132,
-                westLeft: 231,
-                southStraight: 456,
-                southLeft: 654,
-                northStraight: 789,
-                northLeft: 987
+                eastStraight: eastStraight.stranded,
+                eastLeft: eastLeft.stranded,
+                westStraight: westStraight.stranded,
+                westLeft: westLeft.stranded,
+                southStraight: southStraight.stranded,
+                southLeft: southLeft.stranded,
+                northStraight: northStraight.stranded,
+                northLeft: northLeft.stranded,
+                key: 'stranded'
             },
             {
                 dataItem: '车流量净变化量',
-                eastStraight: 123,
-                eastLeft: 321,
-                westStraight: 132,
-                westLeft: 231,
-                southStraight: 456,
-                southLeft: 654,
-                northStraight: 789,
-                northLeft: 987
+                eastStraight: eastStraight.unitGrowth - eastStraight.unitReduce,
+                eastLeft: eastLeft.unitGrowth - eastLeft.unitReduce,
+                westStraight: westStraight.unitGrowth - westStraight.unitReduce,
+                westLeft: westLeft.unitGrowth - westLeft.unitReduce,
+                southStraight: southStraight.unitGrowth - southStraight.unitReduce,
+                southLeft: southLeft.unitGrowth - southLeft.unitReduce,
+                northStraight: northStraight.unitGrowth - northStraight.unitReduce,
+                northLeft: northLeft.unitGrowth - northLeft.unitReduce,
+                key: 'unitChange'
             },
             {
                 dataItem: '当前路口红绿灯',
-                eastStraight: (<div className="trafficLight-green"/>),
-                eastLeft: (<div className="trafficLight-red"/>),
-                westStraight: ((<div className="trafficLight-red"/>)),
-                westLeft: (<div className="trafficLight-red"/>),
-                southStraight: (<div className="trafficLight-green"/>),
-                southLeft: (<div className="trafficLight-green"/>),
-                northStraight: (<div className="trafficLight-green"/>),
-                northLeft: (<div className="trafficLight-green"/>)
+                eastStraight: (<div className={"trafficLight-" + eastStraight.light}/>),
+                eastLeft: (<div className={"trafficLight-" + eastLeft.light}/>),
+                westStraight: ((<div className={"trafficLight-" + westStraight.light}/>)),
+                westLeft: (<div className={"trafficLight-" + westLeft.light}/>),
+                southStraight: (<div className={"trafficLight-" + southStraight.light}/>),
+                southLeft: (<div className={"trafficLight-" + southLeft.light}/>),
+                northStraight: (<div className={"trafficLight-" + northLeft.light}/>),
+                northLeft: (<div className={"trafficLight-" + northLeft.light}/>),
+                key: 'light'
             }
         ];
         const columns = [
@@ -48,6 +69,7 @@ export class DataTable extends React.Component {
             },
             {
                 title: '东',
+                key: 'east',
                 children:[{
                     title: '直行',
                     dataIndex: 'eastStraight',
@@ -61,6 +83,7 @@ export class DataTable extends React.Component {
             },
             {
                 title: '西',
+                key: 'west',
                 children:[{
                     title: '直行',
                     dataIndex: 'westStraight',
@@ -74,6 +97,7 @@ export class DataTable extends React.Component {
             },
             {
                 title: '南',
+                key: 'south',
                 children:[{
                     title: '直行',
                     dataIndex: 'southStraight',
@@ -87,6 +111,7 @@ export class DataTable extends React.Component {
             },
             {
                 title: '北',
+                key: 'north',
                 children:[{
                     title: '直行',
                     dataIndex: 'northStraight',

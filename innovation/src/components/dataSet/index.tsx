@@ -1,9 +1,8 @@
 import {Tabs, Slider, InputNumber, Row, Col, Divider} from 'antd';
 import * as React from "react";
-// import 'antd/dist/antd.css'
+import 'antd/dist/antd.css';
 import './index.scss'
 import {CrossroadsData} from "../../share/constant";
-import {number} from "prop-types";
 const {TabPane} = Tabs;
 
 interface DataSetProps {
@@ -27,6 +26,9 @@ export class IntegerStep extends React.Component<IntegerStepProps,any> {
     };
 
     onChange = (value:any) => {
+        this.setState({
+            inputValue: value,
+        });
         this.props.dataChange(value,this.props.direction,this.props.changeDataType);
     };
 

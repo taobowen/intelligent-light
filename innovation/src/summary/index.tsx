@@ -1,14 +1,14 @@
 import * as React from "react";
 import {Divider, Layout} from "antd";
+import 'antd/dist/antd.css';
 import {Simulation} from "../components/simulation";
 import {DataSet} from "../components/dataSet";
 import {DataTable} from "../components/dataTable";
 import {CrossroadsData, Direction} from "../share/constant";
-import {string} from "prop-types";
 
 const { Content, Sider } = Layout;
 
-interface DirectionData {
+export interface DirectionData {
     light: string,
     unitGrowth: number,
     unitReduce: number,
@@ -26,57 +26,57 @@ interface SummaryState {
     northLeft: DirectionData
 }
 
-class Summary extends React.Component<{}, SummaryState> {
+export class Summary extends React.Component<{}, SummaryState> {
     constructor(props: any) {
         super(props);
         this.state = {
             eastStraight: {
-                unitGrowth: 0,
-                unitReduce: 0,
-                light: "red",
-                stranded: 0
+                unitGrowth: 1,
+                unitReduce: 1,
+                light: "green",
+                stranded: 1
             },
             eastLeft: {
-                unitGrowth: 0,
-                unitReduce: 0,
-                light: "red",
-                stranded: 0
+                unitGrowth: 1,
+                unitReduce: 1,
+                light: "green",
+                stranded: 1
             },
             westStraight: {
-                unitGrowth: 0,
-                unitReduce: 0,
+                unitGrowth: 1,
+                unitReduce: 1,
                 light: "red",
-                stranded: 0
+                stranded: 1
             },
             westLeft: {
-                unitGrowth: 0,
-                unitReduce: 0,
+                unitGrowth: 1,
+                unitReduce: 1,
                 light: "red",
-                stranded: 0
+                stranded: 1
             },
             southStraight: {
-                unitGrowth: 0,
-                unitReduce: 0,
+                unitGrowth: 1,
+                unitReduce: 1,
                 light: "red",
-                stranded: 0
+                stranded: 1
             },
             southLeft: {
-                unitGrowth: 0,
-                unitReduce: 0,
+                unitGrowth: 1,
+                unitReduce: 1,
                 light: "red",
-                stranded: 0
+                stranded: 1
             },
             northStraight: {
-                unitGrowth: 0,
-                unitReduce: 0,
+                unitGrowth: 1,
+                unitReduce: 1,
                 light: "red",
-                stranded: 0
+                stranded: 1
             },
             northLeft: {
-                unitGrowth: 0,
-                unitReduce: 0,
+                unitGrowth: 1,
+                unitReduce: 1,
                 light: "red",
-                stranded: 0
+                stranded: 1
             },
         }
     }
@@ -168,12 +168,12 @@ class Summary extends React.Component<{}, SummaryState> {
         return (
             <Layout  style={{ padding: '24px 100px', background: '#fff' }}>
                 <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                    <Simulation/>
+                    <Simulation data={this.state}/>
                 </Content>
                 <Sider width={700} style={{ background: '#fff' }}>
-                    <DataSet dataChange={this.setData}/>
+                    <DataSet dataChange={this.setData} />
                     <Divider />
-                    <DataTable/>
+                    <DataTable data={this.state}/>
                 </Sider>
             </Layout>
         );

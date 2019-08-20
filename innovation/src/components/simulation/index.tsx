@@ -1,14 +1,30 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
-import {Card} from "antd";
+import 'antd/dist/antd.css';
+import {DirectionData} from "../../summary";
+import {DataTable} from "../dataTable";
+interface SimulationData {
+    eastStraight: DirectionData,
+    eastLeft: DirectionData,
+    westStraight: DirectionData,
+    westLeft: DirectionData,
+    southStraight: DirectionData,
+    southLeft: DirectionData,
+    northStraight: DirectionData,
+    northLeft: DirectionData
+}
 
-export class Simulation extends React.Component{
-    xxRef: React.RefObject<HTMLCanvasElement> = React.createRef()
+interface DataTableProps {
+    data: SimulationData
+}
+
+export class Simulation extends React.Component<DataTableProps, any>{
+    xxRef: React.RefObject<HTMLCanvasElement> = React.createRef();
     componentDidMount() {
         this.updateCanvas();
     }
     updateCanvas() {
         if(this.xxRef.current){
+            const {eastStraight ,eastLeft, northLeft, northStraight, southLeft, southStraight, westLeft, westStraight} = this.props.data;
             const context = this.xxRef.current.getContext('2d');
             if(context){
                 context.beginPath();
@@ -46,13 +62,94 @@ export class Simulation extends React.Component{
                 context.textAlign = "center";
                 context.textBaseline = "middle";
                 context.fillText("北",625,75);
-                //西直行
-                context.moveTo(125,475);
-                context.lineTo(625,475);
-                context.moveTo(625,475);
-                context.lineTo(600,450);
-                context.moveTo(625,475);
-                context.lineTo(600,500);
+                // 东直行
+                if(eastStraight.light == "green") {
+                    context.moveTo(625,275);
+                    context.lineTo(125,275);
+                    context.moveTo(125,275);
+                    context.lineTo(150,250);
+                    context.moveTo(125,275);
+                    context.lineTo(150,300);
+                }
+                // 东左拐
+                if(eastLeft.light == "green") {
+                    context.moveTo(625,350);
+                    context.lineTo(475,350);
+                    context.moveTo(475,350);
+                    context.lineTo(350,475);
+                    context.moveTo(350,475);
+                    context.lineTo(350,625);
+                    context.moveTo(350,625);
+                    context.lineTo(375,600);
+                    context.moveTo(350,625);
+                    context.lineTo(325,600);
+                }
+                // 西直行
+                if (westStraight.light == "green") {
+                    context.moveTo(125,475);
+                    context.lineTo(625,475);
+                    context.moveTo(625,475);
+                    context.lineTo(600,450);
+                    context.moveTo(625,475);
+                    context.lineTo(600,500);
+                }
+                // 西左拐
+                if (westLeft.light == "green") {
+                    context.moveTo(125,400);
+                    context.lineTo(275,400);
+                    context.moveTo(275,400);
+                    context.lineTo(400,275);
+                    context.moveTo(400,275);
+                    context.lineTo(400,125);
+                    context.moveTo(400,125);
+                    context.lineTo(375,150);
+                    context.moveTo(400,125);
+                    context.lineTo(425,150);
+                }
+                // 南直行
+                if (southStraight.light == "green") {
+                    context.moveTo(475,625);
+                    context.lineTo(475,125);
+                    context.moveTo(475,125);
+                    context.lineTo(450,150);
+                    context.moveTo(475,125);
+                    context.lineTo(500,150);
+                }
+                // 南左拐
+                if (southLeft.light == "green") {
+                    context.moveTo(400,625);
+                    context.lineTo(400,475);
+                    context.moveTo(400,475);
+                    context.lineTo(275,350);
+                    context.moveTo(275,350);
+                    context.lineTo(125,350);
+                    context.moveTo(125,350);
+                    context.lineTo(150,325);
+                    context.moveTo(125,350);
+                    context.lineTo(150,375);
+                }
+                // 北直行
+                if (northStraight.light == "green"){
+                    context.moveTo(275,125);
+                    context.lineTo(275,625);
+                    context.moveTo(275,625);
+                    context.lineTo(250,600);
+                    context.moveTo(275,625);
+                    context.lineTo(300,600);
+                }
+                // 北左拐
+                if (northLeft.light == "green") {
+                    context.moveTo(350,125);
+                    context.lineTo(350,275);
+                    context.moveTo(350,275);
+                    context.lineTo(475,400);
+                    context.moveTo(475,400);
+                    context.lineTo(625,400);
+                    context.moveTo(625,400);
+                    context.lineTo(600,425);
+                    context.moveTo(625,400);
+                    context.lineTo(600,375);
+                }
                 context.stroke();
                 context.save();
             }
