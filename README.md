@@ -17,6 +17,14 @@
 
 &emsp;&emsp;重写大创。完成环境配置，页面绘制，去掉了之前的曲线图，其中用了一些公司的包，想本地起项目需做修改，算法方面还没对接，下次抽时间写一下，争取用到mobx。
 
+### 修改
+
+- 开发时间：2019.8.20
+
+- 内容
+
+&emsp;&emsp;完成状态设计，interface设置。
+
 - 技术栈
 
 &emsp;&emsp;typescript、react、antd（组件框架）
@@ -24,25 +32,32 @@
 - 目录（src文件夹）
 
 ```
-│  App.scss  
-│  App.tsx  
-│  index.css  
-│  index.tsx  
-│  react-app-env.d.ts  
-│  serviceWorker.ts  
-│  
-└─components  
-    ├─dataSet  
-    │      index.scss  
-    │      index.tsx  
-    │  
-    ├─dataTable  
-    │      index.scss  
-    │      index.tsx  
-    │  
-    └─simulation  
-            index.scss  
-            index.tsx  
+│  App.scss
+│  App.tsx
+│  index.css
+│  index.tsx
+│  react-app-env.d.ts
+│  serviceWorker.ts
+│
+├─components
+│  ├─dataSet
+│  │      index.scss
+│  │      index.tsx
+│  │
+│  ├─dataTable
+│  │      index.scss
+│  │      index.tsx
+│  │
+│  └─simulation
+│          index.scss
+│          index.tsx
+│
+├─share
+│      constant.tsx
+│
+└─summary
+        index.scss
+        index.tsx
  ```
 
 
