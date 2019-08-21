@@ -5,26 +5,9 @@ import {Simulation} from "../components/simulation";
 import {DataSet} from "../components/dataSet";
 import {DataTable} from "../components/dataTable";
 import {CrossroadsData, Direction} from "../share/constant";
+import {SummaryState} from "../api/interface";
 
 const { Content, Sider } = Layout;
-
-export interface DirectionData {
-    light: string,
-    unitGrowth: number,
-    unitReduce: number,
-    stranded: number,
-}
-
-interface SummaryState {
-    eastStraight: DirectionData,
-    eastLeft: DirectionData,
-    westStraight: DirectionData,
-    westLeft: DirectionData,
-    southStraight: DirectionData,
-    southLeft: DirectionData,
-    northStraight: DirectionData,
-    northLeft: DirectionData
-}
 
 export class Summary extends React.Component<{}, SummaryState> {
     constructor(props: any) {
@@ -79,10 +62,6 @@ export class Summary extends React.Component<{}, SummaryState> {
                 stranded: 1
             },
         }
-    }
-
-    componentDidMount(): void {
-
     }
 
     setData = (value: number, direction: string, changeDataType: string) => {

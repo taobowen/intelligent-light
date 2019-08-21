@@ -2,22 +2,7 @@ import * as React from "react";
 import {Table} from "antd";
 import 'antd/dist/antd.css';
 import './index.scss'
-import {DirectionData} from "../../summary";
-
-interface DataTableData {
-    eastStraight: DirectionData,
-    eastLeft: DirectionData,
-    westStraight: DirectionData,
-    westLeft: DirectionData,
-    southStraight: DirectionData,
-    southLeft: DirectionData,
-    northStraight: DirectionData,
-    northLeft: DirectionData
-}
-
-interface DataTableProps {
-    data: DataTableData
-}
+import {DataTableProps} from "../../api/interface";
 
 export class DataTable extends React.Component<DataTableProps, any> {
     render() {

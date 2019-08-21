@@ -3,22 +3,8 @@ import * as React from "react";
 import 'antd/dist/antd.css';
 import './index.scss'
 import {CrossroadsData} from "../../share/constant";
+import {DataSetProps, IntegerStepProps, TabPaneContentProps} from "../../api/interface";
 const {TabPane} = Tabs;
-
-interface DataSetProps {
-    dataChange: (value:number,direction:string,changeDataType:string) => void
-}
-
-interface TabPaneContentProps {
-    dataChange: (value:number,direction:string,changeDataType:string) => void,
-    direction: string
-}
-
-interface IntegerStepProps {
-    dataChange: (value:number,direction:string,changeDataType:string) => void,
-    direction: string,
-    changeDataType: string
-}
 
 export class IntegerStep extends React.Component<IntegerStepProps,any> {
     state = {

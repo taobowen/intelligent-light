@@ -1,21 +1,6 @@
 import * as React from "react";
 import 'antd/dist/antd.css';
-import {DirectionData} from "../../summary";
-import {DataTable} from "../dataTable";
-interface SimulationData {
-    eastStraight: DirectionData,
-    eastLeft: DirectionData,
-    westStraight: DirectionData,
-    westLeft: DirectionData,
-    southStraight: DirectionData,
-    southLeft: DirectionData,
-    northStraight: DirectionData,
-    northLeft: DirectionData
-}
-
-interface DataTableProps {
-    data: SimulationData
-}
+import {DataTableProps} from "../../api/interface";
 
 export class Simulation extends React.Component<DataTableProps, any>{
     xxRef: React.RefObject<HTMLCanvasElement> = React.createRef();
