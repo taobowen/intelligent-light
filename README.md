@@ -1,7 +1,7 @@
 # Da-Chuang
 
 
-### 关于自适应交通灯控制的web仿真程序
+# 关于自适应交通灯控制的web仿真程序
 
    - 简介
    
@@ -25,11 +25,11 @@
 
 &emsp;&emsp;完成状态设计，interface设置。
 
-- 技术栈
+## 技术栈
 
 &emsp;&emsp;typescript、react、antd（组件框架）
 
-- 目录（src文件夹）
+## 目录（src文件夹）
 
 ```
 │  App.scss
