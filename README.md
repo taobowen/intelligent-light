@@ -1,15 +1,17 @@
-# Intelligent_light
+# Intelligent-light
 
 
 # 自适应交通灯控制web仿真程序
 
    - 简介
    
-   &emsp;&emsp;初学前端时做的，页面包括一个canvas绘制的模拟路口，滑块控制路口数据，曲线图、表格显示路口数据。
+   &emsp;&emsp;上大学时做的一个骗钱的创新创业项目。
 
 ## 技术栈
 
-&emsp;&emsp;typescript、react、antd
+- typescript
+- react
+- antd
 
 ## 目录（src文件夹）
 
